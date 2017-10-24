@@ -56,7 +56,7 @@ You can now keep using CoinHive's JavaScript Miner without worrying about AdBloc
 
 ## Sources
 
-All the UI sources have been uploaded to this repo, and the API endpoints are publicly hosted in [hook.io](https://hook.io)
+All the website sources have been uploaded to [this repo](https://github.com/coin-hive-proxy-party/website), and the API endpoints are publicly hosted in [hook.io](https://hook.io)
 
 - [/registration](https://hook.io/zeit/registration/source)
 
