@@ -12,7 +12,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build && rm -rf docs && mv build docs && cp README.md docs/README.md",
+    "build": "react-scripts build && cp README.md build/README.md && cp CNAME build/CNAME",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   }
