@@ -15,7 +15,7 @@ Go ahead and [create your proxy in a few seconds](https://coinhive-proxy.party)!
 
 ## Instructions
 
-##### 1. Select a pool
+#### 1. Select a pool
 
 Go to [CoinHive Proxy](https://coinhive-proxy.party) and select a pool.
 
@@ -25,7 +25,7 @@ The other pools have different **commisions** and **difficulties** than CoinHive
 
 Once you selected the pool you want to use, click on `Get your proxy`.
 
-##### 2. Deploy your proxy
+#### 2. Deploy your proxy
 
 Enter your email address and click on `Deploy to ▲ Z E I T`.
 
@@ -35,7 +35,7 @@ Don't worry if you don't have a **▲ Z E I T** account, they will create on for
 
 Once you confirm your email, your proxy will be deployed.
 
-##### 3. Use your proxy
+#### 3. Use your proxy
 
 Once your proxy is deployed, you will get **your proxy url** and a **snippet** that you will need to use to replace CoinHive's miner url.
 
