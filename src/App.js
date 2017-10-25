@@ -138,9 +138,17 @@ class App extends Component {
   };
 
   handleSelectPool = () => {
-    analytics.track("SELECT POOL", {
+    const poolData = {
       pool: this.state.pool
-    });
+    };
+
+    if (this.state.pool === "custom") {
+      poolData.host = this.state.host;
+      poolData.port = this.state.port;
+      poolData.diff = this.state.diff;
+    }
+
+    analytics.track("SELECT POOL", poolData);
     analytics.track("CREATE PROXY - " + this.state.pool.toUpperCase());
     this.setState({ step: 1 });
   };
