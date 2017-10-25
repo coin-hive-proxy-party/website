@@ -14,7 +14,8 @@ import {
   Icon,
   Message,
   Modal,
-  Header
+  Header,
+  Segment
 } from "semantic-ui-react";
 import "./App.css";
 
@@ -60,6 +61,10 @@ const pools = [
     difficulty: 150000,
     minimum: 1,
     website: "xmr.nanopool.org"
+  },
+  {
+    value: "custom",
+    text: "Custom Pool"
   }
 ];
 
@@ -73,6 +78,9 @@ class App extends Component {
       waiting: false,
       waitingForEmailConfirmation: false,
       waitingForDeployment: false,
+      host: localStorage.host,
+      port: localStorage.port,
+      diff: localStorage.diff,
       registration: {
         token: "v8897mzg6vDOXWKyOh44RWY6",
         securityCode: "Sunny Pied Tamarin"
@@ -108,10 +116,32 @@ class App extends Component {
     });
   };
 
+  handleChangeHost = (event, data) => {
+    localStorage.host = data.value;
+    this.setState({
+      host: data.value
+    });
+  };
+
+  handleChangePort = (event, data) => {
+    localStorage.port = data.value;
+    this.setState({
+      port: data.value
+    });
+  };
+
+  handleChangeDiff = (event, data) => {
+    localStorage.diff = data.value;
+    this.setState({
+      diff: data.value
+    });
+  };
+
   handleSelectPool = () => {
-    analytics.track("CREATE PROXY - " + this.state.pool.toUpperCase(), {
+    analytics.track("SELECT POOL", {
       pool: this.state.pool
     });
+    analytics.track("CREATE PROXY - " + this.state.pool.toUpperCase());
     this.setState({ step: 1 });
   };
 
@@ -176,7 +206,13 @@ class App extends Component {
         error: null
       });
       analytics.track("DEPLOYMENT STARTED");
-      const resp = await fetch(`https://hook.io/zeit/deploy?token=${this.state.token}&pool=${this.state.pool}`);
+      const customPoolQuery =
+        this.state.pool === "custom" && this.state.host && this.state.port && this.state.diff
+          ? `&host=${this.state.host}&port=${this.state.port}&diff=${this.state.diff}`
+          : "";
+      const resp = await fetch(
+        `https://hook.io/zeit/deploy?token=${this.state.token}&pool=${this.state.pool}${customPoolQuery}`
+      );
       const json = await resp.json();
       if (json.error) {
         analytics.track("ERROR", {
@@ -301,7 +337,7 @@ class App extends Component {
                 placeholder="Select a pool..."
               />
             </Card.Content>
-            {pool ? (
+            {pool && pool.value !== "custom" ? (
               <Card.Content className="pool-info-wrapper">
                 <Statistic.Group size="mini" className="pool-info">
                   <Statistic>
@@ -319,8 +355,35 @@ class App extends Component {
                 </Statistic.Group>
               </Card.Content>
             ) : null}
+            {pool && pool.value === "custom" ? (
+              <Segment attached="center" className="custom">
+                <Input fluid placeholder="Host" value={this.state.host} onChange={this.handleChangeHost} />
+                <Input
+                  type="number"
+                  fluid
+                  placeholder="Port"
+                  value={this.state.port}
+                  onChange={this.handleChangePort}
+                />
+                <Input
+                  type="number"
+                  fluid
+                  placeholder="Difficulty"
+                  value={this.state.diff}
+                  onChange={this.handleChangeDiff}
+                />
+              </Segment>
+            ) : null}
             <Card.Content>
-              <Button secondary fluid onClick={this.handleSelectPool} disabled={!this.state.pool}>
+              <Button
+                secondary
+                fluid
+                onClick={this.handleSelectPool}
+                disabled={
+                  !this.state.pool ||
+                  (this.state.pool === "custom" && (!this.state.host || !this.state.port || !this.state.diff))
+                }
+              >
                 Get your proxy
               </Button>
             </Card.Content>
@@ -356,7 +419,7 @@ class App extends Component {
               {this.state.waitingForDeployment && this.state.status ? (
                 <Loader>
                   <label>Deploying...</label>
-                  <p style={{ marginTop: 20 }}>{this.state.status}</p>
+                  <p style={{ marginTop: 20 }}>{this.state.status}...</p>
                 </Loader>
               ) : null}
             </Dimmer>

@@ -96,3 +96,13 @@
 .ui.modals.dimmer {
   background-color: rgba(0,0,0,.95)!important;
 }
+
+.custom {
+  background-color: #f9f9f9!important;
+  border-bottom: none!important;
+  border-top: 1px solid rgba(34,36,38,.1)!important;
+}
+
+.custom .input:not(:last-child) {
+  margin-bottom: 15px;
+}
