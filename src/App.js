@@ -81,23 +81,10 @@ class App extends Component {
       host: localStorage.host,
       port: localStorage.port,
       diff: localStorage.diff,
-      registration: {
-        token: "v8897mzg6vDOXWKyOh44RWY6",
-        securityCode: "Sunny Pied Tamarin"
-      },
-      token: "Sunny Pied Tamarin",
-      deployment: {
-        uid: "e06gUv1PEce3kbUrug7TF0rh",
-        host: "proxy-khlizawelj.now.sh",
-        state: "READY",
-        stateTs: "2017-10-23T04:01:17.145Z",
-        scale: {
-          min: 0,
-          max: 1,
-          auto: true
-        }
-      },
-      status: "READY",
+      registration: null,
+      token: null,
+      deployment: null,
+      status: null,
       error: null
     };
   }
@@ -488,7 +475,7 @@ class App extends Component {
               <Input
                 className="script"
                 fluid
-                value={`<script src="https://${this.state.deployment.host}/client?proxy"></script>`}
+                value={`<script src="https://${this.state.deployment.host}/client?party"></script>`}
                 readOnly
               />
               <p>Use it the same way you would use the regular CoinHive miner:</p>
@@ -497,7 +484,7 @@ class App extends Component {
                   fluid
                   autoHeight={false}
                   rows={6}
-                  value={`<script src="https://${this.state.deployment.host}/client?proxy"></script>
+                  value={`<script src="https://${this.state.deployment.host}/client?party"></script>
 <script>
   var miner = new CoinHive.Anonymous('${this.state.pool === "coinhive" ? "YOUR_SITE_KEY" : "YOUR_MONERO_ADDRESS"}');
   miner.start();
