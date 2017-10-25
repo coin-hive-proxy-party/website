@@ -522,18 +522,19 @@ class App extends Component {
                     <Icon name="external" size="small" />
                   </a>.
                 </p>
-                <p>
-                  To see your stats, go to {" "}
-                  <a href={"http://" + pool.website} target="_blank">
-                    {pool.website}&nbsp;
-                    <Icon name="external" size="small" />
-                  </a>.
-                </p>
+                {this.state.pool !== "custom" ? (
+                  <p>
+                    To see your stats, go to {" "}
+                    <a href={"http://" + pool.website} target="_blank">
+                      {pool.website}&nbsp;
+                      <Icon name="external" size="small" />
+                    </a>.
+                  </p>
+                ) : null}
               </Message>
             ) : null}
           </Card>
           {this.renderError()}
-          {this.renderHelp()}
         </Container>
       </div>
     );
