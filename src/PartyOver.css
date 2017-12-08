@@ -1,0 +1,41 @@
+.app {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.blocked {
+  position: absolute;
+  font-size: 6em;
+  left: 50%;
+  top: 50%;
+  margin-top: -2px;
+  margin-left: -41px;
+}
+
+.party {
+  position: absolute;
+  font-size: 6em;
+  left: 50%;
+  top: 50%;
+  margin-top: -7px;
+  margin-left: -40px;
+}
+
+.party-blocked {
+  height: 120px;
+  position: relative;
+  width: 120px;
+  cursor: default;
+  margin-bottom: 20px;
+}
+
+.party-over {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
